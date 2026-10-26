@@ -121,13 +121,3 @@ while (len != 0)
 - 使用 `using` 自动释放文件流
 
 AB 可能几十 MB，不能用 `File.ReadAllBytes` 一次性读入内存。
-
-## 8. 可以继续改进
-
-- 下载完成后校验 MD5，避免传输损坏
-- 先写 `.tmp`，校验通过后原子替换，避免半截文件
-- 增加断点续传 / HTTP Range
-- 清理 `downLoadList`，避免重复调用残留
-- 远端清单失败时补 `overCallBack(false)`
-- 把 FTP 地址、账号移到配置，生产改用 HTTPS / CDN
-- 增加 AB 加载与依赖管理（`AssetBundleManifest.GetAllDependencies`）
