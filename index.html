@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>张浩 · Unity 客户端开发作品集</title>
+  <meta name="description" content="Unity 客户端开发作品集：AssetBundle 资源热更新、xLua UI 框架与背包系统、UGUI 业务面板与玩法 Demo。" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <div class="page-glow" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="回到首页">
+      <span class="brand-mark">Z</span>
+      <span class="brand-text">ZHANG HAO<small>UNITY CLIENT</small></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-label="打开菜单" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" aria-label="主导航">
+      <a href="#projects">项目</a>
+      <a href="#ab-hot-update">资源热更新</a>
+      <a href="#xlua-bag">xLua 背包</a>
+      <a href="#code">代码</a>
+      <a class="nav-github" href="https://github.com/xssgg0522" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span class="dot"></span> UNITY CLIENT DEVELOPER · 2026</p>
+        <h1>张浩<span class="accent">.</span></h1>
+        <p class="hero-lead">
+          把资源管线、UI 框架和玩法系统，做成<strong>可维护、可复用</strong>的客户端模块。
+          关注 AssetBundle、xLua、UGUI 与工程化工具。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">查看项目 <span>↓</span></a>
+          <a class="btn btn-ghost" href="https://github.com/xssgg0522" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+        <ul class="hero-meta">
+          <li><span>BASE</span> 重庆</li>
+          <li><span>FOCUS</span> Unity / C#</li>
+          <li><span>STACK</span> xLua · AB · UGUI</li>
+        </ul>
+      </div>
+
+      <div class="hero-visual reveal">
+        <div class="code-window">
+          <div class="window-bar">
+            <span class="window-dots"><i></i><i></i><i></i></span>
+            <span class="window-file">ABUpdateManager.cs</span>
+            <span class="window-tag">C#</span>
+          </div>
+          <pre><code><span class="c-key">public class</span> <span class="c-type">ABUpdateManager</span> : MonoBehaviour
+{
+    <span class="c-key">public async void</span> <span class="c-fn">CheckUpdate</span>()
+    {
+        <span class="c-com">// 1. 下载远端版本清单</span>
+        <span class="c-key">await</span> <span class="c-type">Task</span>.Run(() =&gt; DownLoadManifest());
+
+        <span class="c-com">// 2. 按 MD5 对比本地清单</span>
+        CompareManifest();
+
+        <span class="c-com">// 3. 只下载差异 AB</span>
+        <span class="c-key">await</span> <span class="c-type">Task</span>.Run(() =&gt; DownLoadDiff());
+    }
+}</code></pre>
+          <div class="code-footer">
+            <span><i class="pulse"></i> build / update pipeline</span>
+            <span>MD5 · FTP · Task</span>
+          </div>
+        </div>
+        <div class="orbit orbit-a" aria-hidden="true"></div>
+        <div class="orbit orbit-b" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="stats reveal" aria-label="项目概况">
+      <div><strong>04</strong><span>个项目</span></div>
+      <div><strong>02</strong><span>框架 / 工具项目</span></div>
+      <div><strong>01</strong><span>资源热更新链路</span></div>
+      <div><strong>∞</strong><span>继续复盘</span></div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-head reveal">
+        <p class="section-label">01 / SELECTED WORK</p>
+        <h2>把“能跑”做成“能讲清楚”.</h2>
+        <p class="section-desc">优先展示框架与工具类项目：它们更能体现结构设计、资源管理和工程化意识。</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card project-card--wide reveal">
+          <div class="card-top">
+            <span class="card-index">01</span>
+            <span class="card-year">2026.09</span>
+          </div>
+          <div class="card-body">
+            <p class="card-kicker">RESOURCE PIPELINE</p>
+            <h3>AssetBundle 资源热更新系统</h3>
+            <p class="card-text">
+              Editor 端生成版本清单并上传，客户端按 MD5 做增量比对，只下载差异 AB；
+              FTP + Task 异步下载，带重试、进度与旧包清理。
+            </p>
+            <ul class="tag-list">
+              <li>AssetBundle</li><li>MD5</li><li>FTP</li><li>Task</li><li>EditorWindow</li>
+            </ul>
+          </div>
+          <a class="card-link" href="#ab-hot-update">查看拆解 <span>↘</span></a>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="card-top">
+            <span class="card-index">02</span>
+            <span class="card-year">2026.08</span>
+          </div>
+          <div class="card-body">
+            <p class="card-kicker">UI FRAMEWORK</p>
+            <h3>xLua UI 框架与背包系统</h3>
+            <p class="card-text">
+              Lua 元表实现 Object / BasePanel，命名规范自动绑定控件；
+              背包用 JSON 配置转 id 字典，按页签动态重建 ItemGrid。
+            </p>
+            <ul class="tag-list">
+              <li>xLua</li><li>BasePanel</li><li>UGUI</li><li>JSON</li><li>SpriteAtlas</li>
+            </ul>
+          </div>
+          <a class="card-link" href="#xlua-bag">查看拆解 <span>↘</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section id="ab-hot-update" class="detail-section">
+      <div class="detail-head reveal">
+        <p class="section-label">02 / RESOURCE PIPELINE</p>
+        <div class="detail-title-row">
+          <h2>AssetBundle 资源热更新</h2>
+          <span class="status-pill">核心项目</span>
+        </div>
+        <p class="detail-lead">
+          这是资源热更新，不是 C# 代码热更新。重点在“版本清单 + MD5 增量 + 异步下载 + 旧包清理”这一套链路。
+        </p>
+      </div>
+
+      <div class="detail-grid">
+        <figure class="diagram-card reveal">
+          <img src="assets/ab-hotupdate-flow.svg" alt="AssetBundle 热更新流程图" loading="lazy" />
+          <figcaption>发布端与客户端共用同一份清单格式，客户端以清单为唯一比对依据。</figcaption>
+        </figure>
+        <div class="detail-copy reveal">
+          <h3>我做了什么</h3>
+          <ul class="check-list">
+            <li>用 <code>EditorWindow</code> 收敛平台切换、清单生成、首包同步和 FTP 上传。</li>
+            <li>清单记录文件名、大小、MD5；客户端按 MD5 生成新增 / 变更 / 待删除列表。</li>
+            <li>首次安装回退 <code>StreamingAssets</code>，后续读取 <code>persistentDataPath</code>。</li>
+            <li><code>FTP + Task</code> 异步下载，最多 5 轮重试，带进度与结果回调。</li>
+            <li>更新完成后回写本地清单，清理远端已下线的旧 AB。</li>
+          </ul>
+          <div class="mini-grid">
+            <div><span>发布端</span><strong>ABTools</strong></div>
+            <div><span>客户端</span><strong>ABUpdateManager</strong></div>
+            <div><span>清单</span><strong>name / size / MD5</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="insight-grid">
+        <article class="insight reveal">
+          <span class="insight-num">01</span>
+          <h4>版本清单是唯一依据</h4>
+          <p>客户端不猜版本，只按清单里的 MD5 判断：没有就新增，不同就更新，相同就跳过。</p>
+        </article>
+        <article class="insight reveal">
+          <span class="insight-num">02</span>
+          <h4>异步不卡主线程</h4>
+          <p>FTP 和文件读写放进 <code>Task.Run</code>，<code>await</code> 回到主线程再回调 UI。</p>
+        </article>
+        <article class="insight reveal">
+          <span class="insight-num">03</span>
+          <h4>旧包也要清理</h4>
+          <p>远端遍历完后，本地剩下的 key 就是已下线资源，直接从 <code>persistentDataPath</code> 删除。</p>
+        </article>
+      </div>
+
+      <div class="code-line reveal">
+        <span class="code-line-label">CORE CLASSES</span>
+        <code>ABUpdateManager</code><code>ABInfo</code><code>ABTools</code><code>Main</code>
+      </div>
+    </section>
+
+    <section id="xlua-bag" class="detail-section detail-section--alt">
+      <div class="detail-head reveal">
+        <p class="section-label">03 / UI FRAMEWORK</p>
+        <div class="detail-title-row">
+          <h2>xLua UI 框架与背包系统</h2>
+          <span class="status-pill">核心项目</span>
+        </div>
+        <p class="detail-lead">
+          把面板生命周期、控件绑定、Lua 打包和背包数据拆成可复用的层次，减少每个面板重复写加载和查找。
+        </p>
+      </div>
+
+      <div class="detail-grid detail-grid--reverse">
+        <div class="detail-copy reveal">
+          <h3>框架设计</h3>
+          <ul class="check-list">
+            <li><code>Object → BasePanel</code> 两级继承，统一面板加载、显示、隐藏。</li>
+            <li>C# 反射 + <code>GetComponentsInChildren</code>，按 <code>txt/img/sV/tog/btn</code> 前缀自动扫描控件。</li>
+            <li>控件按“名称 + 类型”缓存，新增面板只写业务逻辑。</li>
+            <li>XLua Editor 扩展：Lua 脚本批量转 <code>.txt</code> 并自动设置 AssetBundle 标签。</li>
+            <li>背包 JSON 配置转 <code>id</code> 字典，<code>ItemGrid</code> 只依赖 id 取图标和数量。</li>
+          </ul>
+          <div class="mini-grid">
+            <div><span>框架</span><strong>Object / BasePanel</strong></div>
+            <div><span>背包</span><strong>BagPanel / ItemGrid</strong></div>
+            <div><span>数据</span><strong>ItemData / PlayerData</strong></div>
+          </div>
+        </div>
+        <figure class="diagram-card reveal">
+          <img src="assets/xlua-architecture.svg" alt="xLua UI 框架结构图" loading="lazy" />
+          <figcaption>框架层、数据层、资源层拆开，面板只关心自己的业务。</figcaption>
+        </figure>
+      </div>
+
+      <div class="insight-grid">
+        <article class="insight reveal">
+          <span class="insight-num">01</span>
+          <h4>命名规范即接入协议</h4>
+          <p>控件按前缀命名即可被扫描到，新增面板不用手写一堆 <code>Find</code>。</p>
+        </article>
+        <article class="insight reveal">
+          <span class="insight-num">02</span>
+          <h4>配置与表现分离</h4>
+          <p>JSON 只提供 id、图标名、数量；ItemGrid 负责把数据变成格子。</p>
+        </article>
+        <article class="insight reveal">
+          <span class="insight-num">03</span>
+          <h4>格子复用</h4>
+          <p>同一套 prefab 和图集服务三个页签，切换时销毁旧格子、按 4 列重建。</p>
+        </article>
+      </div>
+
+      <div class="code-line reveal">
+        <span class="code-line-label">CORE CLASSES</span>
+        <code>Object</code><code>BasePanel</code><code>BagPanel</code><code>ItemGrid</code><code>ItemData</code>
+      </div>
+    </section>
+
+    <section id="more" class="section">
+      <div class="section-head reveal">
+        <p class="section-label">04 / MORE DEMOS</p>
+        <h2>玩法与业务面板.</h2>
+        <p class="section-desc">除了框架项目，也做过完整的玩法循环和 UGUI 业务界面。</p>
+      </div>
+
+      <div class="demo-grid">
+        <article class="demo-card demo-card--tank reveal">
+          <div class="demo-art"><span>TANK</span><small>BATTLE</small></div>
+          <div class="demo-body">
+            <div class="demo-top"><h3>坦克大战与 UGUI 选服面板</h3><span>2025.12–2026.03</span></div>
+            <p>TankBaseObj 统一伤害与死亡；怪物 AI 用随机路径点 + 射程 / 攻击间隔状态机；泛型 UIManager 管理面板；另含登录、注册、选服面板。</p>
+            <ul class="tag-list"><li>面向对象</li><li>怪物 AI</li><li>UIManager</li><li>PlayerPrefs</li></ul>
+          </div>
+        </article>
+
+        <article class="demo-card demo-card--siege reveal">
+          <div class="demo-art"><span>SIEGE</span><small>TOWER DEFENSE</small></div>
+          <div class="demo-body">
+            <div class="demo-top"><h3>丧尸围城</h3><span>2026.03</span></div>
+            <p>3D 塔防：选角 / 解锁、造塔点、3 种防御塔与升级链；怪物通过 NavMeshAgent 按波次进攻；塔与怪物参数走 JSON 配置。</p>
+            <ul class="tag-list"><li>NavMesh</li><li>塔防</li><li>波次</li><li>JSON 配表</li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="code" class="section code-section">
+      <div class="section-head reveal">
+        <p class="section-label">05 / CODE SAMPLES</p>
+        <h2>核心代码节选.</h2>
+        <p class="section-desc">只保留关键脚本，已移除 FTP 账号、服务器地址等敏感信息。</p>
+      </div>
+
+      <div class="code-grid">
+        <a class="repo-card reveal" href="https://github.com/xssgg0522/unity-portfolio/tree/main/code-samples/ab-hot-update" target="_blank" rel="noreferrer">
+          <div class="repo-head"><span class="repo-icon">C#</span><span>ab-hot-update</span><span class="repo-arrow">↗</span></div>
+          <p>ABUpdateManager / ABTools / Main</p>
+          <div class="repo-meta"><span>C#</span><span>Unity 2022.3</span><span>FTP · Task</span></div>
+        </a>
+        <a class="repo-card reveal" href="https://github.com/xssgg0522/unity-portfolio/tree/main/code-samples/xlua-bag" target="_blank" rel="noreferrer">
+          <div class="repo-head"><span class="repo-icon">Lua</span><span>xlua-bag</span><span class="repo-arrow">↗</span></div>
+          <p>Object / BasePanel / BagPanel / ItemGrid</p>
+          <div class="repo-meta"><span>Lua</span><span>xLua</span><span>UGUI</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section id="about" class="section about-section">
+      <div class="about-grid">
+        <div class="reveal">
+          <p class="section-label">06 / ABOUT</p>
+          <h2>课程项目，<br />但不止于“跑通”.</h2>
+        </div>
+        <div class="about-copy reveal">
+          <p>
+            这些项目来自课程学习与个人复现。我把它们重新整理成可阅读的文档和代码样例，
+            重点补上“为什么这样做”和“哪里还可以更好”，而不是只停留在功能演示。
+          </p>
+          <p>
+            目前关注 Unity 客户端开发、资源管线与 UI 框架；如果你正在找 2026 届 Unity 客户端开发，
+            欢迎通过 GitHub 联系我。
+          </p>
+          <div class="skill-cloud">
+            <span>Unity 2022.3</span><span>C#</span><span>xLua</span><span>Lua</span>
+            <span>AssetBundle</span><span>UGUI</span><span>JSON</span><span>NavMesh</span>
+            <span>FTP</span><span>MD5</span><span>EditorWindow</span><span>PlayerPrefs</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <span class="footer-mark">Z</span>
+      <p>张浩 · Unity 客户端开发</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/xssgg0522" target="_blank" rel="noreferrer">GitHub ↗</a>
+      <a href="#top">回到顶部 ↑</a>
+    </div>
+    <p class="footer-note">© <span id="year">2026</span> Zhang Hao. Built with HTML / CSS.</p>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
+
