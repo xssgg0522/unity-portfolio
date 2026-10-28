@@ -125,25 +125,3 @@ self.count.text = num
 2. 给复制后的文件设置 `AssetBundleName = "lua"`
 
 这样 Lua 脚本可以走 AB 包更新，不需要手动拷贝和手动设置标签。
-
-## 8. 设计上的取舍
-
-**做得好的地方**
-
-- `Object → BasePanel` 两层继承，公共逻辑只写一次
-- 控件自动绑定，新增面板接入成本低
-- 命名规范 + 类型字典，解决同名控件和同物体多脚本的问题
-- 背包数据驱动，`ItemGrid` 可复用
-- 配置 / 表现分离，JSON 改数据不需要改 UI 代码
-
-**可以继续改进**
-
-- `BagPanel` 里 `nowTye` / `nowType` 拼写不一致，建议统一
-- 每个 `ItemGrid` 都加载一次图集，可以在 `BagPanel` 加载后传给格子
-- 格子对象可以池化，避免频繁 `Instantiate / Destroy`
-- 控件绑定可以加缓存失效和缺失提示
-- Lua 脚本热更可以进一步接入版本校验
-
-## 9. 面试一句话
-
-> 这个项目用 Lua 元表实现 Object / BasePanel 两级继承，把面板加载、显示、隐藏和控件绑定收口；背包侧用 JSON 配置转 id 字典，BagPanel 按装备 / 道具 / 宝石三个页签动态重建 ItemGrid，图标从 SpriteAtlas 取，整体是数据驱动的 UI 结构。
