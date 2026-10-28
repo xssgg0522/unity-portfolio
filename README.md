@@ -97,6 +97,21 @@
 
 ---
 
+## 项目演示视频
+
+视频通过 GitHub Releases 托管，避免把大文件直接塞进 Git 历史。
+
+| 项目 | 时长 | 分辨率 | 文件 |
+| --- | --- | --- | --- |
+| [AssetBundle 资源热更新](https://github.com/xssgg0522/unity-portfolio/releases/download/v1.0-demo/ab-hot-update.mp4) | 1:55 | 720p | 17.3 MB · MP4 |
+| [坦克大战与 UGUI 选服面板](https://github.com/xssgg0522/unity-portfolio/releases/download/v1.0-demo/tank-battle.mp4) | 2:19 | 720p | 68.7 MB · MP4 |
+| [丧尸围城](https://github.com/xssgg0522/unity-portfolio/releases/download/v1.0-demo/zombie-siege.mov) | 2:09 | 1080p | 352.3 MB · MOV |
+
+Release 页面：[v1.0-demo](https://github.com/xssgg0522/unity-portfolio/releases/tag/v1.0-demo)  
+视频说明：[videos/README.md](videos/README.md)
+
+---
+
 ## 代码样例
 
 | 目录 | 内容 |
